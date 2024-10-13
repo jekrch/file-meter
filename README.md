@@ -1,4 +1,4 @@
-# File Meter
+# File Meter :open_file_folder:
 
 A Docker-based tool to find the largest files in a specified directory.
 
