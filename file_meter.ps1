@@ -11,27 +11,15 @@ function Test-Docker {
     }
 }
 
-# run docker commands silently
-function Invoke-DockerCommand {
-    param (
-        [string]$Command
-    )
-    $output = Invoke-Expression "docker $Command 2>&1"
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "An error occurred. Please check your Docker installation and try again."
-        exit 1
-    }
-    return $output
-}
-
 # validate number of arguments
-if ($args.Count -ne 2) {
-    Write-Host "Usage: .\file_meter.ps1 <directory_path> <number_of_files>"
+if ($args.Count -lt 2 -or $args.Count -gt 3) {
+    Write-Host "Usage: .\file_meter.ps1 <directory_path> <number_of_files> [-t]"
     exit 1
 }
 
 $DIRECTORY = $args[0]
 $NUM_FILES = $args[1]
+$T_FLAG = if ($args.Count -eq 3 -and $args[2] -eq "-t") { "-t" } else { $null }
 
 # directory exists
 if (-not (Test-Path -Path $DIRECTORY -PathType Container)) {
@@ -46,18 +34,17 @@ if (-not (Test-Docker)) {
 }
 
 # Name of the Docker image
-$IMAGE_NAME = "file-meter-app"
-
-# Silently build the Docker image if it doesn't exist
-$imageExists = Invoke-DockerCommand "images -q $IMAGE_NAME"
-if (-not $imageExists) {
-    Write-Host "Preparing application..."
-    Invoke-DockerCommand "build -q -t $IMAGE_NAME ."
-}
+$IMAGE_NAME = "file-size-analyzer"
 
 # Run the Docker container and stream its output
 Write-Host "Starting file analysis..."
 $absolutePath = Resolve-Path $DIRECTORY
-docker run --rm -v "${absolutePath}:/scan" $IMAGE_NAME "/scan" $NUM_FILES
+$dockerCmd = "docker run -it -v `"${absolutePath}:/data`" $IMAGE_NAME /data $NUM_FILES"
+if ($T_FLAG) {
+    $dockerCmd += " -t"
+}
+
+Write-Host "Executing: $dockerCmd"
+Invoke-Expression $dockerCmd
 
 Write-Host "Analysis complete."

@@ -12,27 +12,22 @@ check_docker() {
     fi
 }
 
-# build docker image if it doesn't exist
-build_image() {
-    if [[ "$(docker images -q file-meter-app 2> /dev/null)" == "" ]]; then
-        echo "Preparing application..."
-        docker build -q -t file-meter-app . > /dev/null
-    fi
-}
-
 # main script
 main() {
     local directory
     local num_files
+    local t_flag=""
 
     # check if arguments are provided
-    if [ $# -eq 2 ]; then
+    if [ $# -ge 2 ] && [ $# -le 3 ]; then
         directory="$1"
         num_files="$2"
+        if [ $# -eq 3 ] && [ "$3" = "-t" ]; then
+            t_flag="-t"
+        fi
     else
-        # prompt for input if arguments are not provided
-        read -p "Enter the directory path to scan: " directory
-        read -p "Enter the number of largest files to find: " num_files
+        echo "Usage: $0 <directory_path> <number_of_files> [-t]"
+        exit 1
     fi
 
     # validate directory
@@ -41,13 +36,14 @@ main() {
         exit 1
     fi
 
-    # check docker and build image
+    # check docker
     check_docker
-    build_image
 
     # run docker container
     echo "Analyzing files in $directory..."
-    docker run --rm -v "$directory:/scan" file-meter-app "/scan" "$num_files"
+    docker_cmd="docker run -it -v \"$directory:/data\" file-size-analyzer /data $num_files $t_flag"
+    echo "Executing: $docker_cmd"
+    eval $docker_cmd
 }
 
 # Run the main function
