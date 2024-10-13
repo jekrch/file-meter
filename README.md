@@ -2,13 +2,9 @@
 
 A Docker-based tool to find the largest files in a specified directory.
 
-## Requirements
-
-- Docker
-
 ## Setup
 
-1. Clone this repository
+1. Clone repository
 2. Ensure Docker is running
 
 ## Usage
@@ -34,14 +30,6 @@ Run the script:
 ```
 Or run without arguments for interactive mode.
 
-## Contents
-
-- `Dockerfile`: Defines the Docker image
-- `entrypoint.sh`: Docker container entry point
-- `file_size_analyzer.sh`: Main file analysis script
-- `file_meter.bat`: Windows wrapper
-- `file_meter.ps1`: PowerShell script for Windows
-- `file_meter.sh`: Linux wrapper
 
 ## Notes
 
