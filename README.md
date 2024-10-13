@@ -29,8 +29,3 @@ Run the script:
 ./file_meter.sh /path/to/directory 10
 ```
 Or run without arguments for interactive mode.
-
-
-## Notes
-
-This is a personal learning project to explore Docker and file system operations.
