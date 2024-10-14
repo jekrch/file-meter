@@ -78,7 +78,6 @@ Size            | File
 10.7 MB         | Music/concert_live.mp3
 9.8 MB          | Documents/presentation.pptx
 8.6 MB          | Images/family_portrait.psd
-Analysis complete.
 ```
 
 ### Analyzing by File Types
@@ -107,5 +106,4 @@ Total Size           | Count      | Avg Size        | File Type
 22.4 MB              | 5          | 4.5 MB          | blend
 18.7 MB              | 42         | 456.1 KB        | mp3
 15.2 MB              | 23         | 676.9 KB        | pptx
-Analysis complete.
 ```
