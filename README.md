@@ -64,7 +64,6 @@ Counting files...
 Total files to process: 1257
 Scanning files...
 Progress: [##################################################.] 100%
-Processing...
 Analysis complete. Largest 10 files:
 Size            | File
 ----------------+--------------------------------------------------
@@ -78,7 +77,6 @@ Size            | File
 10.7 MB         | Music/concert_live.mp3
 9.8 MB          | Documents/presentation.pptx
 8.6 MB          | Images/family_portrait.psd
-Analysis complete.
 ```
 
 ### Analyzing by File Types
@@ -93,7 +91,6 @@ Counting files...
 Total files to process: 1257
 Scanning files...
 Progress: [##################################################.] 100%
-Processing...
 Analysis complete. Top 10 file types by total size:
 Total Size           | Count      | Avg Size        | File Type
 --------------------+------------+-----------------+------------------
@@ -107,5 +104,4 @@ Total Size           | Count      | Avg Size        | File Type
 22.4 MB              | 5          | 4.5 MB          | blend
 18.7 MB              | 42         | 456.1 KB        | mp3
 15.2 MB              | 23         | 676.9 KB        | pptx
-Analysis complete.
 ```

@@ -147,8 +147,6 @@ rm "$pipe"
 
 wait  # wait for the background progress bar process to finish
 
-echo -e "\nProcessing..."
-
 # print final results
 print_results
 

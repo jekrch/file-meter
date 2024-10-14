@@ -46,5 +46,3 @@ if ($T_FLAG) {
 
 Write-Host "Executing: $dockerCmd"
 Invoke-Expression $dockerCmd
-
-Write-Host "Analysis complete."
